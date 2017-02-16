@@ -151,4 +151,69 @@ public class Main extends JFrame implements ActionListener{
 		
 		 
 	 }
+	//ImageResize class allows to resize the image by resizing width and height of image
+	 public class ImgResized extends JFrame implements ActionListener {
+	  JPanel panel;
+	  JTextField textWidth;
+	  JTextField textHeight;
+	  JButton Okbt;
+	  ImgResized(){
+	  setTitle("Image resize");
+	  //setDefaultCloseOperation(EXIT_ON_CLOSE);
+	  setPreferredSize(new Dimension(400,100));
+	  
+	  Okbt=new JButton("OK");
+	  Okbt.setBackground(Color.BLACK);
+	  Okbt.setForeground(Color.BLUE);  
+	  Okbt.addActionListener(this);
+
+	  textWidth=new JTextField(4);
+	  textWidth.addKeyListener(new KeyList());
+	  textHeight=new JTextField(4);
+	  textHeight.addKeyListener(new KeyList());
+	  panel=new JPanel();
+	  panel.setLayout(new FlowLayout());
+	  panel.add(new JLabel("Width:"));
+	  panel.add(textWidth);
+	  panel.add(new JLabel("Height:"));
+	  
+	  panel.add(textHeight);
+	  panel.add(Okbt);
+	  panel.setBackground(Color.GRAY);
+	  add(panel, BorderLayout.CENTER);
+	  setVisible(true);
+	  pack();
+	  enableComponents(false);
+	  }
+	  
+	  public void enableComponents(boolean enabled){
+	   textWidth.setEnabled(enabled);
+	   textHeight.setEnabled(enabled);
+	   Okbt.setEnabled(enabled);
+	  }
+	  
+	  public void actionPerformed(ActionEvent e){
+	   if(e.getSource()==Okbt){
+	    ima.setActionResized(true);     
+	    ima.ImgResize(Integer.parseInt(textWidth.getText()),Integer.parseInt(textHeight.getText()));
+	    enableSaving(true);
+	    ima.repaint();
+	    }
+	  }
+	  
+	  public class KeyList extends KeyAdapter{
+	     public void keyTyped(KeyEvent ke){
+	 
+	    char c = ke.getKeyChar(); 
+	    int intkey=(int)c;
+	    if(!(intkey>=48 && intkey<=57 || intkey==8 || intkey==127))
+	     {
+	     ke.consume();
+	  
+	      }  
+	     
+	   }
+	  
+	  } 
+	 }
 }

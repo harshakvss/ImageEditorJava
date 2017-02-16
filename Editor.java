@@ -131,5 +131,59 @@ class ImgArea extends Canvas{
    imgLoad=true;
    }catch(Exception e){System.exit(-1);}
   }
+	
+	 public BufferedImage createBufferedImageFromImage(Image image, int width, int height, boolean tran)
+   { BufferedImage dest ;
+  if(tran) 
+       dest = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+  else
+   dest = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+       Graphics2D g2 = dest.createGraphics();
+       g2.drawImage(image, 0, 0, null);
+       g2.dispose();
+       return dest;
+   }
+ 
+
+ public void filterImage(){
+	 float[] elements={0.0f, 1.0f, 0.0f, -1.0f,e,1.0f,0.0f,0.0f,0.0f};
+	 Kernel kernel=new Kernel(3,3,elements);//create kernel object to encapsulate the elements array
+	 ConvolveOp cop = new ConvolveOp(kernel, ConvolveOp.EDGE_NO_OP, null); //create ConvolveOp to encapsulate the kernel
+	 bufimg= new BufferedImage(BufferedImg.getWidth(),BufferedImg.getHeight(),BufferedImage.TYPE_INT_RGB);
+	 cop.filter(BufferedImg,bufimg); 
+	 
+	  
+ }
+
+ public void setValue(float value){ 
+  e=value;
+ }
+
+ public void setActionSlided(boolean value ){ 
+  actionSlided=value;
+ }
+
+ public void initialize(){
+	   imgLoad=false; 
+	   actionSlided=false;
+	   actionResized=false;
+	   actionCompressed=false;
+	   actionTransparent=false;
+	   actionRotated=false;
+	   actionDraw=false;
+	   drawn=false;
+	   dirHor=false;
+	   c=null;
+	   radian=0.0f;
+	   e=0.0f;
+	   }
+ //cancelling the editing done so far
+ public void reset(){
+ if(imgLoad){
+ prepareImg(imgFileName);
+ repaint();
+ }
+ 
+}
 
   

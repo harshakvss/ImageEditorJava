@@ -249,6 +249,25 @@ public class Main extends JFrame implements ActionListener{
 	     enableSaving(true);
 	     } 
 	    }
-	  } 
+	  }
+	public void setImage(){
+	  
+	  int retValue = Choose.showOpenDialog(this);
+	      if(retValue == JFileChooser.APPROVE_OPTION) {   
+	   filename=Choose.getSelectedFile().toString();
+	   ima.prepareImg(filename);
+	   }
+	           
+	  }
+
+
+
+	 
+	 public void enableSaving(boolean f){
+	  saveas.setEnabled(f);
+	  save.setEnabled(f); 
+	  
+	  }
+	
 	      
 }

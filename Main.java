@@ -216,4 +216,39 @@ public class Main extends JFrame implements ActionListener{
 	  
 	  } 
 	 }
+	public void actionPerformed(ActionEvent e){
+
+	  JMenuItem source = (JMenuItem)(e.getSource());
+	  if(source.getText().compareTo("Open...")==0)
+	    {
+	    setImage();
+	    ima.repaint();
+	     validate();
+	      
+	     }
+	  else if(source.getText().compareTo("Image brightness")==0)
+	    {
+	     
+	    ImgBrighten ib=new ImgBrighten(); 
+	    if(ImgArea.imgLoad)
+	     ib.enabledSlider(true); 
+	     }
+	     
+	  else if(source.getText().compareTo("Image resize")==0)
+	    {
+	     
+	    ImgResized ir=new ImgResized();
+	    if(ImgArea.imgLoad)
+	     ir.enableComponents(true);  
+	     }
+		   else if(source.getText().compareTo("Image rotation")==0)
+	    {
+	     
+	    if(ImgArea.imgLoad){
+	     ima.rotateImage();
+	     enableSaving(true);
+	     } 
+	    }
+	  } 
+	      
 }

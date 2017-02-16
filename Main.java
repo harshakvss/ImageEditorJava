@@ -109,4 +109,43 @@ public class Main extends JFrame implements ActionListener{
 	  enableSaving(false);
 	  ima.requestFocus();
 	  }
+public class ImgBrighten extends JFrame implements ChangeListener{
+
+		 JSlider slider;
+		
+		
+		ImgBrighten(){
+			addWindowListener(new WindowAdapter(){
+				public void windowClosing(WindowEvent e){
+					dispose();
+				}
+			});
+			
+			Container cont=getContentPane();
+			slider=new JSlider(-10,10,0);
+			slider.setEnabled(false);
+			slider.addChangeListener(this);
+			cont.add(slider, BorderLayout.CENTER);
+			slider.setEnabled(true);
+			setTitle("Image Brightness");
+			setPreferredSize(new Dimension(300,100));
+			setVisible(true);
+			pack();
+			
+			enabledSlider(false);
+					}
+		public void enabledSlider(boolean enabled){
+			slider.setEnabled(enabled);
+		}
+		
+		public void stateChanged(ChangeEvent e) {
+			ima.setValue(slider.getValue()/10.0f);
+		    ima.setActionSlided(true);   
+		    ima.filterImage();
+		    ima.repaint();
+		    enableSaving(true);
+			
+		}	 
+	 }
 }
+
